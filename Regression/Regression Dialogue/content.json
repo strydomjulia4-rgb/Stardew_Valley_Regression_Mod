@@ -1,0 +1,49 @@
+{
+  "Format": "2.9.0",
+  "Changes": [
+    {
+      "LogName": "Sebastian",
+      "Action": "Include",
+      "FromFile": "Dialogue/NPCs/Sebastian.json"
+    },
+    {
+      "LogName": "Jodi",
+      "Action": "Include",
+      "FromFile": "Dialogue/NPCs/Jodi.json"
+    },
+    {
+      "LogName": "Gus",
+      "Action": "Include",
+      "FromFile": "Dialogue/NPCs/Gus.json"
+    },
+    {
+      "LogName": "Sam",
+      "Action": "Include",
+      "FromFile": "Dialogue/NPCs/Sam.json"
+    },
+    {
+      "LogName": "Penny",
+      "Action": "Include",
+      "FromFile": "Dialogue/NPCs/Penny.json"
+    },
+    {
+      "LogName": "Vincent",
+      "Action": "Include",
+      "FromFile": "Dialogue/NPCs/Vincent.json"
+    },
+    {
+      "LogName": "Jas",
+      "Action": "Include",
+      "FromFile": "Dialogue/NPCs/Jas.json"
+    },
+
+    {
+      "LogName": "Custom farmhouse",
+      "Action": "Load",
+      "Target": "Maps/FarmHouse",
+      "FromFile": "Assets/CustomFarmhouse.tmx",
+      "Priority": "Exclusive"
+    }
+    
+  ]
+}

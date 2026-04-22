@@ -1,0 +1,91 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+	<PropertyGroup>
+		<EnableModZip>false</EnableModZip>
+		<EnableModDeploy>false</EnableModDeploy>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ApplicationDefinition Include="Assets\CustomFarmhouse.tmx" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.4.1" />
+    <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <None Update="Assets\toilets.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Regression Dialogue\Assets\CustomFarmhouse.tmx">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+    <None Update="Assets\Debug.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\StatusBars.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\sprites.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="en.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="manifest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Readme.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\Assets\farmhouse_tiles.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\Assets\townInterior.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\Assets\walls_and_floors.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\content.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\Dialogue\NPCs\Gus.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\Dialogue\NPCs\Jas.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\Dialogue\NPCs\Jodi.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\Dialogue\NPCs\Penny.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\Dialogue\NPCs\Sam.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\Dialogue\NPCs\Sebastian.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\Dialogue\NPCs\Vincent.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\manifest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="powershell -NoProfile -Command &quot;Remove-Item -Recurse -Force -ErrorAction SilentlyContinue '$(TargetDir)\Regression Mod'; Remove-Item -Force -ErrorAction SilentlyContinue '$(TargetDir)\Regression Mod.zip'; New-Item -ItemType Directory -Force -Path '$(TargetDir)\Regression Mod\Regression' | Out-Null; Copy-Item -Recurse -Force '$(TargetDir)\*' '$(TargetDir)\Regression Mod\Regression' -Exclude 'Regression Mod','Regression Dialogue'; Copy-Item -Recurse -Force '$(TargetDir)\Regression Dialogue' '$(TargetDir)\Regression Mod'; Compress-Archive -Path '$(TargetDir)\Regression Mod' -DestinationPath '$(TargetDir)\Regression Mod.zip' -Force&quot;" />
+  </Target>
+
+</Project>
