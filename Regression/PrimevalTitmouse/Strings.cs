@@ -77,7 +77,7 @@ namespace PrimevalTitmouse
         bool garmentLifted = IsLiftedGarment(garmentRef);
         string lowerAction = garmentLifted ? $"lift your {garmentRef}" : $"pull your {garmentRef} down";
         string lowerActionKnees = garmentLifted ? $"lift your {garmentRef}" : $"slide your {garmentRef} to your knees";
-        str = str.Replace("$PANTS_NAME$", b.pants.name)
+        str = str.Replace("$PANTS_NAME$", b.pants.name?.ToLowerInvariant() ?? string.Empty)
                  .Replace("$PANTS_PREFIX$", b.pants.GetPrefix())
                  .Replace("$PANTS_DESC$", b.pants.description)
                  .Replace("$PANTS_REFERENCE$", garmentRef)

@@ -7,6 +7,9 @@ using StardewValley.Objects;
 using StardewValley.Tools;
 using System;
 using System.Reflection;
+using Regression;
+using System.Threading;
+using System.ComponentModel;
 
 namespace PrimevalTitmouse
 {
@@ -17,6 +20,7 @@ namespace PrimevalTitmouse
     /// </summary>
     public class Body
     {
+        private IMonitor monitor;
         //Lets think of Food in Calories, and water in mL
         //For a day Laborer (like a farmer) that should be ~3500 Cal, and 14000 mL
         //Of course this is dependent on amount of work, but let's go one step at a time
@@ -390,34 +394,20 @@ namespace PrimevalTitmouse
         public void SyncPantsFromOutfit()
         {
             var pantsItem = Game1.player?.pantsItem?.Value;
+            
             if (pantsItem == null)
                 return;
 
-            string displayName = pantsItem.DisplayName;
-            if (string.IsNullOrWhiteSpace(displayName))
-                displayName = "pants";
-
-            bool isSkirt = false;
-            object clothesTypeObj = pantsItem.GetType().GetProperty("clothesType", BindingFlags.Public | BindingFlags.Instance)?.GetValue(pantsItem);
-            if (clothesTypeObj is int clothesTypeInt)
-                isSkirt = clothesTypeInt == 1;
-            else if (clothesTypeObj != null)
-            {
-                object netValue = clothesTypeObj.GetType().GetProperty("Value", BindingFlags.Public | BindingFlags.Instance)?.GetValue(clothesTypeObj);
-                if (netValue is int netClothesTypeInt)
-                    isSkirt = netClothesTypeInt == 1;
-                else if (netValue != null && netValue.ToString().IndexOf("skirt", StringComparison.OrdinalIgnoreCase) >= 0)
-                    isSkirt = true;
-            }
-            if (!isSkirt)
-            {
-                string normalizedName = displayName.ToLowerInvariant();
-                isSkirt = normalizedName.Contains("skirt") || normalizedName.Contains("kilt") || normalizedName.Contains("dress");
-            }
+            string Temp = pantsItem.DisplayName;
+            string displayName = Temp.ToLowerInvariant();
+            bool singularGarment = displayName.Contains("skirt")
+                || displayName.Contains("dress")
+                || displayName.Contains("kilt");
 
             pants.name = displayName;
             pants.description = displayName;
-            pants.plural = !isSkirt;
+            pants.plural = !singularGarment;
+      
         }
 
         //Debug Function, Add a bit of everything

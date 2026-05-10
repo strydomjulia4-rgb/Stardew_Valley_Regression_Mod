@@ -46,7 +46,34 @@
     <None Update="Readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Regression Dialogue\Assets\CustomFarmhouse1.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\Assets\CustomFarmhouse1_Marriage.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\Assets\CustomFarmhouse2.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\Assets\CustomFarmhouse2_Bathroom_Add.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\Assets\CustomFarmhouse2_Bathroom_Remove.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\Assets\CustomFarmhouse2_Marriage.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\Assets\CustomFarmhouse2_Nursery_Add.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\Assets\CustomFarmhouse2_Nursery_Remove.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Regression Dialogue\Assets\farmhouse_tiles.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Regression Dialogue\Assets\SewerTiles.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Regression Dialogue\Assets\townInterior.png">

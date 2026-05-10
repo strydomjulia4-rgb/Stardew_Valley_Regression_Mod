@@ -1,71 +1,75 @@
 ﻿{
 	"Jodi_Initial_Letter": [ "Dear @,^Welcome to town! Here are some veggies from the garden to tide you over while you move in. Your grandpa told me about your little problem, so I enclosed some supplies for you. Visit Pierre if you run out!^      <, Jodi" ],
 	"Food_Low": [
-		"You're hungry.",
-		"Your stomach rumbles.",
-		"You're thinking about eating food.",
-		"You think about finding food.",
-		"You need some food."
+		"I'm getting kinda hungry.",
+		"My stomach rumbles a little.",
+		"I'm thinking about eating food.",
+		"I should find something to eat soon.",
+		"I need to eat soon.",
+		"I'm thinking about getting a snack."
 	],
 	"Food_None": [
-		"You're starving!",
-		"All you can think about is food! Better eat!",
-		"You're so hungry you can't think straight!"
+		"I'm starving!",
+		"All I can think about is food...I better eat!",
+		"I'm so hungry I can't think straight!",
+		"I really need to eat!"
 	],
 	"Water_Low": [
-		"You're getting pretty thirsty.",
-		"You could really use some water.",
-		"You're thinking about getting a drink.",
-		"You need a drink."
+		"I'm getting pretty thirsty.",
+		"I could really go for some water.",
+		"I'm thinking about getting a drink soon.",
+		"I need a drink.",
+		"A bottle of milk might be good right about now..."
 	],
 	"Water_None": [
-		"You're dehydrated!",
-		"You're super thirsty! Get a drink right now!",
-		"You're so thirsty you can't think straight!"
+		"I'm dehydrated!",
+		"I'm really thirsty! I need a drink right now!",
+		"I'm so thirsty I can't think straight!"
 	],
 	"Drink_Water_Source": [
 		"You scoop up some water in a cup and drain it down."
 	],
 	"Bladder_Yellow": [
-		"You need to pee.",
-		"You should find somewhere to pee soon.",
-		"You feel like you might pee soon.",
-		"Your bladder is getting full."
+		"I need to tinkle.",
+		"I should find somewhere to pee soon.",
+		"I feel a slight need to pee.",
+		"I think I might need to tinkle soon."
 	],
-	"Bladder_Orange": [
-		"You really need to pee!",
-		"You're not sure how much longer you can hold your pee!",
-		"If you don't pee soon, you'll have an accident!",
-		"You start crossing your legs trying not to pee yourself!"
+	"Bladder_Orange": [  
+		"I really have to tinkle!",
+		"I'm not sure how long I can hold my pee anymore!",
+		"If I don't find a bathroom soon, I'll wet myself!",
+		"You start crossing your legs a little."
 	],
 	"Bladder_Red": [
-		"You can’t hold it anymore! You're about to pee yourself!",
+		"I can't hold it anymore, I feel like I'm going to pee myself!",
 		"You have to pee so badly you start hopping around!",
-		"You feel a few drops of pee leak out into your $UNDERWEAR_NAME$!"
+		"You feel a few drops of pee leak out into your $UNDERWEAR_NAME$!",
+		"You feel your $UNDERWEAR_NAME$ start getting a little damp!"
 	],
 	"Bowels_Yellow": [
-		"You need to poop.",
-		"You should find somewhere to poop soon.",
-		"You feel a rumble in your bowels.",
-		"It might be time to poop."
+		"You're starting to feel a slight pressure in your tummy.",
+		"I feel like I have to make a stinky soon.",
+		"You feel a familiar rumble in your gut.",
+		"I might need to poop soon."
 	],
 	"Bowels_Orange": [
-		"You really need to poop!",
-		"If you don't find a place to poop soon, you'll mess yourself!",
-		"You're not sure how much longer you can hold your poop!"
+		"I really have to poop!",
+		"If I don't find a potty soon, I'll mess myself!",
+		"I'm not sure how much longer I can hold my poop in!"
 	],
 	"Bowels_Red": [
-		"You can feel the poop starting to push out!",
-		"You can’t hold it anymore! You're about to mess yourself!"
+		"I can feel my poop starting to come out!",
+		"I can't hold it anymore, Im messing myself!",
+    "You feel your $UNDERWEAR_NAME$ start tenting a little!"
 	],
-	"Bladder_Continence_Yellow": [ "You seem to be getting worse at holding your pee." ],
-	"Bladder_Continence_Orange": [ "You're getting pretty bad at holding your pee." ],
-	"Bladder_Continence_Red": [ "You're getting close to being unable to hold your pee." ],
-	"Bladder_Continence_Min": [ "You're almost totally unable to hold your pee." ],
-	"Bowel_Continence_Yellow": [ "You seem to be getting worse at holding your poop." ],
-	"Bowel_Continence_Orange": [ "You're getting pretty bad at holding your poop." ],
-	"Bowel_Continence_Red": [ "You're getting close to being unable to hold your poop." ],
-	"Bowel_Continence_Min": [ "You're almost totally unable to hold your poop." ],
+	"Bladder_Continence_Yellow": [ "It seems like you've gotten worse at holding your pee." ],
+	"Bladder_Continence_Orange": [ "You're definitely getting worse at holding your pee." ],
+	"Bladder_Continence_Red": [ "You're getting close to losing full control of your bladder." ],
+	"Bladder_Continence_Min": [ "You've lost almost all control of holding your pee." ],
+	"Bowel_Continence_Yellow": [ "It seems like you've gotten worse at holding your poop." ],
+	"Bowel_Continence_Orange": [ "You're definitely getting worse at holding your poop." ],
+	"Bowel_Continence_Red": [ "You're getting close to losing full control of your bowels." ],
 	"Pee_Voluntary": [
 		"You drop your $UNDERWEAR_NAME$ and pee on the ground.",
 		"Moving your $UNDERWEAR_NAME$, you take a deep breath and empty your bladder.",

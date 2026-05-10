@@ -69,6 +69,8 @@ namespace PrimevalTitmouse
             h.Events.Display.MenuChanged += new EventHandler<MenuChangedEventArgs>(ReceiveMenuChanged);
             h.Events.Display.RenderingHud += new EventHandler<RenderingHudEventArgs>(ReceivePreRenderHudEvent);
 
+            
+
             // Fallback keybind configuration path that works even when GMCM API signatures differ.
             h.ConsoleCommands.Add("reg_listkeys", "List current Regression keybinds.", this.CommandListKeys);
             h.ConsoleCommands.Add("reg_setkey", "Set a Regression keybind: reg_setkey <action> <SButton>.", this.CommandSetKey);
