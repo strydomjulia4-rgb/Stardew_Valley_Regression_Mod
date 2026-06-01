@@ -12,10 +12,9 @@ namespace PrimevalTitmouse
     /// </summary>
     public static class Mail
     {
-        private static bool letterShown = false;
+        private static readonly HashSet<long> starterRewardsGranted = new();
         public static IModHelper helper;
         private static readonly string initialRegressionLetterTitle = "jodi_initial_regression";
-        private static string letterContents = Regression.t.Jodi_Initial_Letter[0];
         private static List<Item> initialSupplies = new();
 
         /// <summary>
@@ -27,7 +26,7 @@ namespace PrimevalTitmouse
             if (!Game1.player.hasOrWillReceiveMail(initialRegressionLetterTitle))
             {
                 initialSupplies = new();
-                letterShown = false;
+                starterRewardsGranted.Remove(Game1.player.UniqueMultiplayerID);
 
                 //Always give turnips and diapers
                 initialSupplies.Add(ItemRegistry.Create("(O)399", 20));           //OLD CODE: (new StardewValley.Object("399", 20, false, -1, 0)
@@ -38,12 +37,11 @@ namespace PrimevalTitmouse
                 {
                     initialSupplies.Add(new Underwear("lavender pullup", 0.0f, 0.0f, 15));
                 }
-                // Build this message fresh each time we queue the starter letter.
-                letterContents = Regression.t.Jodi_Initial_Letter[0] + "[#]A Little... Protection.";
+                string letterContents = Regression.t.Jodi_Initial_Letter[0] + "[#]A Little... Protection.";
                 Game1.mailbox.Add(initialRegressionLetterTitle);
                 Dictionary<string, string> mails = Game1.content.Load<Dictionary<string, string>>("Data\\mail");
-                if(!mails.ContainsKey(initialRegressionLetterTitle))
-                  mails.Add(initialRegressionLetterTitle, letterContents);
+                if (!mails.ContainsKey(initialRegressionLetterTitle))
+                    mails[initialRegressionLetterTitle] = letterContents;
 
                 //Just to test we haven't broken other letters;
                 //Game1.mailbox.Add("robinWell");
@@ -60,9 +58,10 @@ namespace PrimevalTitmouse
         public static void ShowLetter(LetterViewerMenu letterViewer)
         {
             string mail = letterViewer.mailTitle;
-            if (mail == initialRegressionLetterTitle && !letterShown)
+            long playerId = Game1.player.UniqueMultiplayerID;
+            if (mail == initialRegressionLetterTitle && !starterRewardsGranted.Contains(playerId))
             {
-                letterShown = true;
+                starterRewardsGranted.Add(playerId);
                 foreach (Item item in initialSupplies)
                 {
                     if (!Game1.player.addItemToInventoryBool(item))

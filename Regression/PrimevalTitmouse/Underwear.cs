@@ -25,6 +25,64 @@ namespace PrimevalTitmouse
         }
 
         /// <summary>
+        /// Ensures <see cref="container"/> exists; repairs items deserialized without custom state.
+        /// </summary>
+        public bool EnsureInitialized()
+        {
+            if (container != null)
+                return true;
+
+            if (TryRebuildFromModData())
+                return true;
+
+            // Fall back to a safe default type. Important: do NOT reference Name/DisplayName/Status here,
+            // because those call EnsureInitialized(), causing recursion/stack overflow.
+            string type = id;
+
+            // If an item somehow kept partial modData but lost the flag, try reading it anyway.
+            if (string.IsNullOrWhiteSpace(type)
+                && modData.TryGetValue(UnderwearSerialization.ModDataPrefix + "type", out string modType)
+                && !string.IsNullOrWhiteSpace(modType))
+            {
+                type = modType;
+            }
+
+            if (string.IsNullOrWhiteSpace(type))
+            {
+                // Prefer the default underwear the Body constructor uses, if present in the data file.
+                if (Regression.t?.Underwear_Options != null && Regression.t.Underwear_Options.ContainsKey("dinosaur undies"))
+                    type = "dinosaur undies";
+                else
+                    type = Regression.t?.Underwear_Options?.Keys?.FirstOrDefault();
+            }
+
+            if (string.IsNullOrWhiteSpace(type))
+                return false;
+
+            Initialize(type, wetness: 0.0f, messiness: 0.0f, count: Math.Max(1, Stack));
+            return true;
+        }
+
+        private bool TryRebuildFromModData()
+        {
+            if (modData.TryGetValue(UnderwearSerialization.ModDataFlag, out string flag) != true || flag != "true")
+                return false;
+
+            var data = new Dictionary<string, string>();
+            foreach (string key in new[] { "type", "wetness", "messiness", "stack", "dryingTime" })
+            {
+                if (modData.TryGetValue(UnderwearSerialization.ModDataPrefix + key, out string value))
+                    data[key] = value;
+            }
+
+            if (!data.ContainsKey("type"))
+                return false;
+
+            rebuild(data, this);
+            return container != null;
+        }
+
+        /// <summary>
         /// Creates a custom underwear item with persisted condition values.
         /// </summary>
         public Underwear(string type, float wetness = 0.0f, float messiness = 0.0f, int count = 1)
@@ -54,11 +112,21 @@ namespace PrimevalTitmouse
         /// </summary>
         public override void drawInMenu(SpriteBatch spriteBatch, Vector2 location, float scaleSize, float transparency, float layerDepth, StackDrawType drawStackNumber, Color color, bool drawShadow)
         {
+            if (!EnsureInitialized())
+                return;
+
+            Texture2D sprites = Animations.GetSprites();
+            if (sprites == null)
+            {
+                base.drawInMenu(spriteBatch, location, scaleSize, transparency, layerDepth, drawStackNumber, color, drawShadow);
+                return;
+            }
+
             int ratio = Animations.LARGE_SPRITE_DIM / Animations.SMALL_SPRITE_DIM;
             Vector2 offset = new(Game1.tileSize/2, Game1.tileSize/2); //Center of tile
             Vector2 origin = new(Animations.LARGE_SPRITE_DIM/2, Animations.LARGE_SPRITE_DIM/2); //Center of Sprite
             Rectangle source = Animations.UnderwearRectangle(container, FullnessType.None, Animations.LARGE_SPRITE_DIM);
-            spriteBatch.Draw(Animations.sprites, location + offset, new Rectangle?(source), Color.White * transparency, 0.0f, origin, Game1.pixelZoom * scaleSize/ratio, SpriteEffects.None, layerDepth);
+            spriteBatch.Draw(sprites, location + offset, new Rectangle?(source), Color.White * transparency, 0.0f, origin, Game1.pixelZoom * scaleSize/ratio, SpriteEffects.None, layerDepth);
             if (drawStackNumber.Equals(StackDrawType.Hide) || maximumStackSize() <= 1 || (scaleSize <= 0.3 || Stack == int.MaxValue) || Stack <= 1)
                 return;
             Utility.drawTinyDigits(Stack, spriteBatch, location + new Vector2(Game1.tileSize - Utility.getWidthOfTinyDigitString(Stack, 3f * scaleSize) + 3f * scaleSize, (float)(Game1.tileSize - 18.0 * scaleSize + 2.0)), 3f * scaleSize, 1f, Color.White);
@@ -69,8 +137,15 @@ namespace PrimevalTitmouse
         /// </summary>
         public override void drawWhenHeld(SpriteBatch spriteBatch, Vector2 objectPosition, Farmer f)
         {
+            if (!EnsureInitialized())
+                return;
+
+            Texture2D sprites = Animations.GetSprites();
+            if (sprites == null)
+                return;
+
             Rectangle rectangle = Animations.UnderwearRectangle(this.container, FullnessType.None, Animations.LARGE_SPRITE_DIM);
-            spriteBatch.Draw(Animations.sprites, objectPosition, new Rectangle?(rectangle), Color.White, 0.0f, Vector2.Zero, Game1.pixelZoom/(Animations.LARGE_SPRITE_DIM/Animations.SMALL_SPRITE_DIM), SpriteEffects.None, Math.Max(0.0f, (f.StandingPixel.Y + 2) / 10000f));
+            spriteBatch.Draw(sprites, objectPosition, new Rectangle?(rectangle), Color.White, 0.0f, Vector2.Zero, Game1.pixelZoom/(Animations.LARGE_SPRITE_DIM/Animations.SMALL_SPRITE_DIM), SpriteEffects.None, Math.Max(0.0f, (f.StandingPixel.Y + 2) / 10000f));
         }
 
         /// <summary>
@@ -78,6 +153,8 @@ namespace PrimevalTitmouse
         /// </summary>
         public Dictionary<string, string> getAdditionalSaveData()
         {
+            if (!EnsureInitialized())
+                throw new InvalidOperationException("Cannot serialize underwear without initialized container state.");
             return new Dictionary<string, string>()
             {
                 {
@@ -108,6 +185,8 @@ namespace PrimevalTitmouse
         /// </summary>
         public override string getDescription()
         {
+            if (!EnsureInitialized())
+                return "";
             string source = Strings.DescribeUnderwear(this.container, (string)null);
             return Game1.parseText(source.First().ToString().ToUpper() + source.Substring(1), Game1.smallFont, Game1.tileSize * 6 + Game1.tileSize / 6);
         }
@@ -117,7 +196,9 @@ namespace PrimevalTitmouse
         /// </summary>
         protected override Item GetOneNew()
         {
-            return new Underwear(this.name, this.container.wetness, this.container.messiness, 1);
+            if (!EnsureInitialized())
+                return ItemRegistry.Create("(O)685", 1);
+            return new Underwear(container.name, container.wetness, container.messiness, 1);
         }
 
         /// <summary>
@@ -125,7 +206,9 @@ namespace PrimevalTitmouse
         /// </summary>
         public StardewValley.Object getReplacement()
         {
-            return (StardewValley.Object)ItemRegistry.Create("(O)685", 1);
+            var replacement = (StardewValley.Object)ItemRegistry.Create("(O)685", Stack);
+            UnderwearSerialization.EmbedModData(replacement, getAdditionalSaveData());
+            return replacement;
         }
 
         /// <summary>
@@ -148,6 +231,8 @@ namespace PrimevalTitmouse
         /// </summary>
         public override int maximumStackSize()
         {
+            if (!EnsureInitialized())
+                return 1;
             if (container.messiness > 0.0 || container.wetness > 0.0 || container.IsDrying())
                 return 1;
             return base.maximumStackSize();
@@ -199,6 +284,8 @@ namespace PrimevalTitmouse
         {
             get
             {
+                if (!EnsureInitialized())
+                    return "";
                 if (container.messiness > 0.0 && container.wetness > 0.0)
                     return "wet and messy ";
                 if (container.messiness > 0.0)

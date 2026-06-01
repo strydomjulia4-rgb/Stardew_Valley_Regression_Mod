@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using HarmonyLib;
 using xTile.Dimensions;
 
 namespace PrimevalTitmouse
@@ -59,6 +60,8 @@ namespace PrimevalTitmouse
             config = Helper.ReadConfig<Config>();
             t = Helper.Data.ReadJsonFile<Data>(string.Format("{0}.json", (object)config.Lang)) ?? Helper.Data.ReadJsonFile<Data>("en.json");
             h.Events.GameLoop.Saving += new EventHandler<SavingEventArgs>(this.BeforeSave);
+            h.Events.GameLoop.SaveLoaded += new EventHandler<SaveLoadedEventArgs>(this.OnSaveLoaded);
+            h.Events.GameLoop.ReturnedToTitle += new EventHandler<ReturnedToTitleEventArgs>(this.OnReturnedToTitle);
             h.Events.GameLoop.GameLaunched += new EventHandler<GameLaunchedEventArgs>(this.OnGameLaunched);
             h.Events.GameLoop.DayStarted += new EventHandler<DayStartedEventArgs>(ReceiveAfterDayStarted);
             h.Events.GameLoop.OneSecondUpdateTicking += new EventHandler<OneSecondUpdateTickingEventArgs>(ReceiveUpdateTick);
@@ -76,6 +79,16 @@ namespace PrimevalTitmouse
             h.ConsoleCommands.Add("reg_setkey", "Set a Regression keybind: reg_setkey <action> <SButton>.", this.CommandSetKey);
             h.ConsoleCommands.Add("reg_savekeys", "Save current Regression config to disk.", this.CommandSaveKeys);
             h.ConsoleCommands.Add("reg_resetkeys", "Reset Regression keybinds to defaults.", this.CommandResetKeys);
+
+            try
+            {
+                var harmony = new Harmony(ModManifest.UniqueID);
+                SerializationPatches.Apply(harmony);
+            }
+            catch (System.Exception ex)
+            {
+                Monitor.Log($"Failed to apply multiplayer serialization patches: {ex}", LogLevel.Error);
+            }
         }
 
         /// <summary>
@@ -83,6 +96,9 @@ namespace PrimevalTitmouse
         /// </summary>
         public void DrawStatusBars()
         {
+            if (body == null)
+                return;
+
             // Position custom bars near the vanilla HUD meters.
             int x1 = Game1.graphics.GraphicsDevice.Viewport.TitleSafeArea.Right - (65 + (int)((StatusBars.barWidth)));
             // Bottom-align with vanilla stamina/health meters (more padding than the old custom bars needed).
@@ -136,16 +152,67 @@ namespace PrimevalTitmouse
             Game1.activeClickableMenu = new ItemGrabMenu(objList);
         }
 
+
         /// <summary>
-        /// Reconstructs serialized custom underwear items from replacement slots.
+        /// Loads local-farmer mod state after a save is loaded (including multiplayer join mid-day).
         /// </summary>
-        private static void restoreItems(StardewValley.Inventories.Inventory items, Dictionary<int, Dictionary<string, string>> invReplacement)
+        private void OnSaveLoaded(object sender, SaveLoadedEventArgs e)
         {
-            foreach (KeyValuePair<int, Dictionary<string, string>> entry in invReplacement)
+            LoadPlayerState(includeWorldChestSidecar: true);
+        }
+
+        private void OnReturnedToTitle(object sender, ReturnedToTitleEventArgs e)
+        {
+            started = false;
+            body = null;
+            who = null;
+        }
+
+        /// <summary>
+        /// Restores body/inventory/chest mod data for the local farmer and enables runtime updates.
+        /// </summary>
+        private void LoadPlayerState(bool includeWorldChestSidecar)
+        {
+            if (Game1.player == null || string.IsNullOrWhiteSpace(Constants.SaveFolderName))
+                return;
+
+            body = ModSaveData.ReadBody(Helper) ?? new Body();
+            who = Game1.player;
+            started = true;
+
+            var invReplacement = ModSaveData.ReadInventorySidecar(Helper);
+            if (invReplacement != null)
+                UnderwearSerialization.RestoreFromSnapshot(Game1.player.Items, invReplacement);
+
+            if (includeWorldChestSidecar)
+                RestoreWorldChestSidecar();
+
+            UnderwearSerialization.ValidateInventory(Game1.player.Items);
+            UnderwearSerialization.ValidateWorldChests();
+
+            if (Game1.player.ActiveObject is Underwear activeUnderwear)
+                activeUnderwear.EnsureInitialized();
+
+            Mail.CheckMail();
+            Animations.GetSprites();
+        }
+
+        private void RestoreWorldChestSidecar()
+        {
+            var chestReplacement = Helper.Data.ReadJsonFile<Dictionary<string, Dictionary<int, Dictionary<string, string>>>>(ModSaveData.ChestPath);
+            if (chestReplacement == null)
+                return;
+
+            int locId = 0;
+            foreach (var location in Game1.locations)
             {
-                var underwear = new Underwear();
-                underwear.rebuild(entry.Value, items[entry.Key]);
-                items[entry.Key] = underwear;
+                foreach (var obj in location.Objects.Values)
+                {
+                    var id = string.Format("{0}-{1}-{2}", locId, obj.TileLocation.X, obj.TileLocation.Y);
+                    if (obj is Chest chest && chestReplacement.ContainsKey(id))
+                        UnderwearSerialization.RestoreFromSnapshot(chest.Items, chestReplacement[id]);
+                }
+                locId++;
             }
         }
 
@@ -154,35 +221,7 @@ namespace PrimevalTitmouse
         /// </summary>
         private void ReceiveAfterDayStarted(object sender, DayStartedEventArgs e)
         {
-            // Restore our serialized body state for this save.
-            body = Helper.Data.ReadJsonFile<Body>(string.Format("{0}/RegressionSave.json", Constants.SaveFolderName)) ?? new Body();
-            started = true;
-            who = Game1.player;
-
-            var invReplacement = Helper.Data.ReadJsonFile< Dictionary<int, Dictionary<string, string>>>(string.Format("{0}/RegressionSaveInv.json", Constants.SaveFolderName));
-            if (invReplacement != null)
-            {
-                restoreItems(Game1.player.Items, invReplacement);
-            }
-
-            var chestReplacement = Helper.Data.ReadJsonFile<Dictionary<string, Dictionary<int, Dictionary<string, string>>>>(string.Format("{0}/RegressionSaveChest.json", Constants.SaveFolderName));
-            if (chestReplacement != null)
-            {
-                int locId = 0;
-                foreach (var location in Game1.locations)
-                {
-                    foreach (var obj in location.Objects.Values)
-                    {
-                        var id = string.Format("{0}-{1}-{2}", locId, obj.TileLocation.X, obj.TileLocation.Y);
-                        if (obj is Chest chest && chestReplacement.ContainsKey(id))
-                        {
-                            restoreItems(chest.Items, chestReplacement[id]);
-                        }
-                    }
-                    locId++;
-                }
-            }
-
+            LoadPlayerState(includeWorldChestSidecar: true);
             Animations.AnimateNight(body);
             HandleMorning(sender, e);
         }
@@ -195,29 +234,12 @@ namespace PrimevalTitmouse
             body.HandleMorning();
         }
 
-        /// <summary>
-        /// Replaces custom underwear items with vanilla placeholders before save.
-        /// </summary>
-        private static Dictionary<int, Dictionary<string, string>> replaceItems(StardewValley.Inventories.Inventory items)
-        {
-            var replacements = new Dictionary<int, Dictionary<string, string>>();
-
-            for (int i = 0; i < items.Count; i++)
-            {
-                if (items[i] is Underwear)
-                {
-                    var underwear = (items[i] as Underwear);
-                    items[i] = underwear.getReplacement();
-                    replacements.Add(i, underwear.getAdditionalSaveData());
-                }
-            }
-
-            return replacements;
-        }
-
         //Save Mod related variables in separate JSON. Also trigger night handling if not on the very first day.
         private void BeforeSave(object Sender, SavingEventArgs e)
         {
+            if (body == null)
+                body = ModSaveData.ReadBody(Helper) ?? new Body();
+
             body.bedtime = lastTimeOfDay;
             if (Game1.dayOfMonth != 1 || Game1.currentSeason != "spring" || Game1.year != 1)
                 body.HandleNight();
@@ -234,22 +256,20 @@ namespace PrimevalTitmouse
                     if (obj is Chest chest)
                     {
                         var id = string.Format("{0}-{1}-{2}", locId, obj.TileLocation.X, obj.TileLocation.Y);
-                        chestReplacements.Add(id, replaceItems(chest.Items));
+                        var snapshot = UnderwearSerialization.ReplaceForXml(chest.Items);
+                        chestReplacements.Add(id, snapshot);
+                        UnderwearSerialization.RestoreFromSnapshot(chest.Items, snapshot);
                     }
-                }
-
-                foreach (var furn in location.furniture.OfType<StorageFurniture>())
-                {
-                    Monitor.Log(string.Format("Found storage furniture {0}", furn.DisplayName), LogLevel.Info);
                 }
                 locId++;
             }
 
-            var invReplacements = replaceItems(Game1.player.Items);
+            var invReplacements = UnderwearSerialization.ReplaceForXml(Game1.player.Items);
+            UnderwearSerialization.RestoreFromSnapshot(Game1.player.Items, invReplacements);
 
-            Helper.Data.WriteJsonFile(string.Format("{0}/RegressionSave.json", Constants.SaveFolderName), body);
-            Helper.Data.WriteJsonFile(string.Format("{0}/RegressionSaveInv.json", Constants.SaveFolderName), invReplacements);
-            Helper.Data.WriteJsonFile(string.Format("{0}/RegressionSaveChest.json", Constants.SaveFolderName), chestReplacements);
+            Helper.Data.WriteJsonFile(ModSaveData.BodyPath, body);
+            Helper.Data.WriteJsonFile(ModSaveData.InventoryPath, invReplacements);
+            Helper.Data.WriteJsonFile(ModSaveData.ChestPath, chestReplacements);
         }
 
         /// <summary>
@@ -262,6 +282,11 @@ namespace PrimevalTitmouse
                 if (!started)
                     return;
 
+
+                if (Game1.player?.Items != null)
+                    UnderwearSerialization.ValidateInventory(Game1.player.Items);
+                if (Game1.player?.ActiveObject is Underwear heldUnderwear)
+                    heldUnderwear.EnsureInitialized();
 
                 //If time is moving, update our body state (Hunger, thirst, etc.)
                 if (ShouldTimePass())
@@ -393,6 +418,8 @@ namespace PrimevalTitmouse
         /// </summary>
         private void OnGameLaunched(object sender, GameLaunchedEventArgs e)
         {
+            Animations.GetSprites();
+
             object api = this.Helper.ModRegistry.GetApi("spacechase0.GenericModConfigMenu");
             if (api == null)
             {
@@ -881,6 +908,9 @@ namespace PrimevalTitmouse
         private void ReceiveTimeOfDayChanged(object sender, TimeChangedEventArgs e)
         {
             lastTimeOfDay = Game1.timeOfDay;
+
+            if (!started || body == null)
+                return;
 
             //If its 6:10AM, handle delivering mail
             if (Game1.timeOfDay == 610)

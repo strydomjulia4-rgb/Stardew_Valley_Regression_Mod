@@ -3,8 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|c:\\users\\stryd\\desktop\\stardew_valley_regression_mod-1.3.0\\regression\\primevaltitmouse\\animations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|solutionrelative:regression\\primevaltitmouse\\animations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|c:\\users\\stryd\\desktop\\stardew_valley_regression_mod-1.3.0\\regression\\en.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|solutionrelative:regression\\en.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|c:\\users\\stryd\\desktop\\stardew_valley_regression_mod-1.3.0\\regression\\regression dialogue\\content.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|solutionrelative:regression\\regression dialogue\\content.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|c:\\users\\stryd\\desktop\\stardew_valley_regression_mod-1.3.0\\regression\\primevaltitmouse\\strings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|solutionrelative:regression\\primevaltitmouse\\strings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|c:\\users\\stryd\\desktop\\stardew_valley_regression_mod-1.3.0\\regression\\primevaltitmouse\\body.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|solutionrelative:regression\\primevaltitmouse\\body.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|c:\\users\\stryd\\desktop\\stardew_valley_regression_mod-1.3.0\\regression\\primevaltitmouse\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|solutionrelative:regression\\primevaltitmouse\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|c:\\users\\stryd\\desktop\\stardew_valley_regression_mod-1.3.0\\regression\\primevaltitmouse\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|solutionrelative:regression\\primevaltitmouse\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|c:\\users\\stryd\\desktop\\stardew_valley_regression_mod-1.3.0\\regression\\primevaltitmouse\\underwear.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|solutionrelative:regression\\primevaltitmouse\\underwear.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|c:\\users\\stryd\\desktop\\stardew_valley_regression_mod-1.3.0\\regression\\primevaltitmouse\\consumable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|solutionrelative:regression\\primevaltitmouse\\consumable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|c:\\users\\stryd\\desktop\\stardew_valley_regression_mod-1.3.0\\regression\\primevaltitmouse\\container.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|solutionrelative:regression\\primevaltitmouse\\container.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{65F7FD12-03C5-440C-9F47-2A86A25362DA}|Regression\\Regression.csproj|c:\\users\\stryd\\desktop\\stardew_valley_regression_mod-1.3.0\\regression\\primevaltitmouse\\regression.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -18,24 +54,132 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "en.json",
+              "DocumentMoniker": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\en.json",
+              "RelativeDocumentMoniker": "Regression\\en.json",
+              "ToolTip": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\en.json",
+              "RelativeToolTip": "Regression\\en.json",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAAFwAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-05-10T18:30:05.259Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Animations.cs",
+              "DocumentMoniker": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\PrimevalTitmouse\\Animations.cs",
+              "RelativeDocumentMoniker": "Regression\\PrimevalTitmouse\\Animations.cs",
+              "ToolTip": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\PrimevalTitmouse\\Animations.cs",
+              "RelativeToolTip": "Regression\\PrimevalTitmouse\\Animations.cs",
+              "ViewState": "AgIAACMBAAAAAAAAAAAiwD4BAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-10T14:12:17.083Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Data.cs",
+              "DocumentMoniker": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\PrimevalTitmouse\\Data.cs",
+              "RelativeDocumentMoniker": "Regression\\PrimevalTitmouse\\Data.cs",
+              "ToolTip": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\PrimevalTitmouse\\Data.cs",
+              "RelativeToolTip": "Regression\\PrimevalTitmouse\\Data.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-10T14:11:57.675Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Body.cs",
+              "DocumentMoniker": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\PrimevalTitmouse\\Body.cs",
+              "RelativeDocumentMoniker": "Regression\\PrimevalTitmouse\\Body.cs",
+              "ToolTip": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\PrimevalTitmouse\\Body.cs",
+              "RelativeToolTip": "Regression\\PrimevalTitmouse\\Body.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-10T14:11:33.35Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Config.cs",
+              "DocumentMoniker": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\PrimevalTitmouse\\Config.cs",
+              "RelativeDocumentMoniker": "Regression\\PrimevalTitmouse\\Config.cs",
+              "ToolTip": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\PrimevalTitmouse\\Config.cs",
+              "RelativeToolTip": "Regression\\PrimevalTitmouse\\Config.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-10T14:11:22.926Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Strings.cs",
+              "DocumentMoniker": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\PrimevalTitmouse\\Strings.cs",
+              "RelativeDocumentMoniker": "Regression\\PrimevalTitmouse\\Strings.cs",
+              "ToolTip": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\PrimevalTitmouse\\Strings.cs",
+              "RelativeToolTip": "Regression\\PrimevalTitmouse\\Strings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-10T14:10:28.022Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Underwear.cs",
+              "DocumentMoniker": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\PrimevalTitmouse\\Underwear.cs",
+              "RelativeDocumentMoniker": "Regression\\PrimevalTitmouse\\Underwear.cs",
+              "ToolTip": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\PrimevalTitmouse\\Underwear.cs",
+              "RelativeToolTip": "Regression\\PrimevalTitmouse\\Underwear.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-10T14:02:36.764Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Consumable.cs",
+              "DocumentMoniker": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\PrimevalTitmouse\\Consumable.cs",
+              "RelativeDocumentMoniker": "Regression\\PrimevalTitmouse\\Consumable.cs",
+              "ToolTip": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\PrimevalTitmouse\\Consumable.cs",
+              "RelativeToolTip": "Regression\\PrimevalTitmouse\\Consumable.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-10T14:02:29.309Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Container.cs",
+              "DocumentMoniker": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\PrimevalTitmouse\\Container.cs",
+              "RelativeDocumentMoniker": "Regression\\PrimevalTitmouse\\Container.cs",
+              "ToolTip": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\PrimevalTitmouse\\Container.cs",
+              "RelativeToolTip": "Regression\\PrimevalTitmouse\\Container.cs",
+              "ViewState": "AgIAAOoAAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-10T14:01:11.429Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "content.json",
               "DocumentMoniker": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\Regression Dialogue\\content.json",
               "RelativeDocumentMoniker": "Regression\\Regression Dialogue\\content.json",
               "ToolTip": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\Regression Dialogue\\content.json",
               "RelativeToolTip": "Regression\\Regression Dialogue\\content.json",
-              "ViewState": "AgIAANAAAAAAAAAAAAAhwOYAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAAFwAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-05-02T19:30:01.541Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-02T19:30:01.541Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 10,
               "Title": "Regression.cs",
               "DocumentMoniker": "C:\\Users\\stryd\\Desktop\\Stardew_Valley_Regression_Mod-1.3.0\\Regression\\PrimevalTitmouse\\Regression.cs",
               "RelativeDocumentMoniker": "Regression\\PrimevalTitmouse\\Regression.cs",
@@ -43,8 +187,7 @@
               "RelativeToolTip": "Regression\\PrimevalTitmouse\\Regression.cs",
               "ViewState": "AgIAAL4CAAAAAAAAAAAAAFoCAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-23T11:02:07.583Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-23T11:02:07.583Z"
             }
           ]
         }

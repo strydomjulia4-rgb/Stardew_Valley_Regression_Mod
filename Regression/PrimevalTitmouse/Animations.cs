@@ -67,7 +67,11 @@ namespace PrimevalTitmouse
         /// </summary>
         public static Texture2D GetSprites()
         {
-            sprites ??= Regression.help.ModContent.Load<Texture2D>(SPRITES);
+            if (sprites != null)
+                return sprites;
+            if (Regression.help == null)
+                return null;
+            sprites = Regression.help.ModContent.Load<Texture2D>(SPRITES);
             return sprites;
         }
 
@@ -76,7 +80,7 @@ namespace PrimevalTitmouse
         /// </summary>
         public static Farmer GetWho()
         {
-            Animations.who ??= Game1.player;
+            who = Game1.player;
             return who;
         }
 
@@ -376,6 +380,8 @@ namespace PrimevalTitmouse
             Microsoft.Xna.Framework.Color defaultColor = Microsoft.Xna.Framework.Color.White;
 
             Texture2D underwearSprites = Animations.GetSprites();
+            if (underwearSprites == null)
+                return;
             Microsoft.Xna.Framework.Rectangle srcBoxCurrent = Animations.UnderwearRectangle(c, FullnessType.None, LARGE_SPRITE_DIM);
 
             Microsoft.Xna.Framework.Rectangle destBoxCurrent = new Microsoft.Xna.Framework.Rectangle(x, y, DIAPER_HUD_DIM, DIAPER_HUD_DIM);
